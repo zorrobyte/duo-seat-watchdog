@@ -51,6 +51,15 @@ Watch one cycle in a visible window without logging anyone off:
 
 `-WhatIf` logs what it *would* do; drop it to arm for real.
 
+## Logging (self-documenting)
+
+Logging is transition-based (not per-poll), so the log stays small and readable, and rotates at 5 MB. It records:
+
+- **Seat discovered / removed** — seats are re-read from config every cycle, so accounts added later are picked up automatically and logged.
+- **Stream ACTIVE / no client** transitions, with the signal that fired (`TCP ...` or `UDP ...`).
+- Every **logoff** (with the resolved `quser` row), and an hourly **Heartbeat** summary.
+- `WARN` lines for the edge cases that actually matter: a seat that's idle past grace but **couldn't be resolved to an RDP session** (name mismatch/truncation, non-rdp session), or **port-range overlap** between seats. Watch these to see which edge cases occur in your real setup before adding more hardening.
+
 ## Uninstall
 
 ```powershell
