@@ -27,6 +27,10 @@ $set     = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoin
 Register-ScheduledTask -TaskName $TaskName -Action $action -Trigger $trigger `
     -Settings $set -User 'SYSTEM' -RunLevel Highest -Force | Out-Null
 
+# Stop any already-running instance so the new settings take effect immediately
+# (Start-ScheduledTask won't replace a running single-instance task).
+try { Stop-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue | Out-Null } catch {}
+Start-Sleep -Seconds 1
 Start-ScheduledTask -TaskName $TaskName
 Write-Host "Registered and started scheduled task '$TaskName' (grace = $GraceMinutes min)." -ForegroundColor Green
 Write-Host "Log: $env:ProgramData\DuoSeatWatchdog\watchdog.log"
