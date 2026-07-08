@@ -43,7 +43,7 @@
     'KillGpuApp' (default) or 'Logoff'.
 
 .PARAMETER GraceMinutes
-    Minutes with no active stream before acting. Default 30.
+    Minutes with no active stream before acting. Default 5.
 
 .PARAMETER GpuThreshold
     nvidia-smi sm% above which a seat-session process is treated as a game to
@@ -67,7 +67,7 @@
 param(
     [ValidateSet('KillGpuApp','Logoff')]
     [string]   $Mode         = 'KillGpuApp',
-    [int]      $GraceMinutes = 30,
+    [int]      $GraceMinutes = 5,
     [int]      $GpuThreshold = 15,
     [string[]] $InfraNames   = @(
         'sunshine','Duo','DuoRdp','DuoManager','nvcontainer','NVDisplay.Container',

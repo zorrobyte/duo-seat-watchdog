@@ -8,7 +8,7 @@ DuoStream runs each streaming user as a real Windows RDP session with its own [S
 
 ## What it does
 
-A PowerShell watchdog that auto-discovers Duo seats from Duo's own `*.conf` files, watches each seat's Sunshine ports for an active stream, and after a grace period (default **30 min**) with no client, acts by **`-Mode`**:
+A PowerShell watchdog that auto-discovers Duo seats from Duo's own `*.conf` files, watches each seat's Sunshine ports for an active stream, and after a grace period (default **5 min**) with no client, acts by **`-Mode`**:
 
 | Mode | Behaviour |
 |---|---|
@@ -66,7 +66,7 @@ Unregister-ScheduledTask -TaskName DuoSeatWatchdog -Confirm:$false
 | Parameter | Default | Meaning |
 |---|---|---|
 | `-Mode` | `KillGpuApp` | `KillGpuApp` (kill game, keep Sunshine) or `Logoff` (log off whole seat) |
-| `-GraceMinutes` | `30` | Minutes with no active stream before acting |
+| `-GraceMinutes` | `5` | Minutes with no active stream before acting |
 | `-GpuThreshold` | `15` | `nvidia-smi` sm% above which a seat process is treated as a game |
 | `-InfraNames` | (list) | Process names never killed even if they use the GPU |
 | `-PollSeconds` | `60` | Seconds between checks |

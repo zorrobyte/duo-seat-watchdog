@@ -9,7 +9,7 @@
 [CmdletBinding()]
 param(
     [string] $TaskName = 'DuoSeatWatchdog',
-    [int]    $GraceMinutes = 30
+    [int]    $GraceMinutes = 5
 )
 
 $ErrorActionPreference = 'Stop'
